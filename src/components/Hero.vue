@@ -5,7 +5,7 @@
         <h2 class="mb-4">
           <strong>Produk Segar dan Sehat </strong>Langsung dari Petani
         </h2>
-        <b-button variant="outline-primary"
+        <b-button to="/foods" variant="outline-primary"
           ><b-icon-arrow-right class="mr-1"></b-icon-arrow-right
           >Button</b-button
         >

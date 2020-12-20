@@ -9,9 +9,12 @@
       style="max-width: 20rem;"
       class="mb-2"
     >
-      <b-card-text> Harga : Rp {{ product.harga }} </b-card-text>
+      <b-card-text> Harga : Rp. {{ product.harga }} </b-card-text>
 
-      <b-button href="#" variant="success"><b-icon-cart4></b-icon-cart4>  Pesan</b-button>
+      <b-button :to="'/food/' + product.id" variant="success"
+        ><b-icon-cart4></b-icon-cart4>
+        Pesan
+      </b-button>
     </b-card>
   </div>
 </template>
