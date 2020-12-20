@@ -11,7 +11,7 @@
     >
       <b-card-text> Harga : Rp. {{ product.harga }} </b-card-text>
 
-      <b-button :to="'/food/' + product.id" variant="success"
+      <b-button :to="'/foods/' + product.id" variant="success"
         ><b-icon-cart4></b-icon-cart4>
         Pesan
       </b-button>
