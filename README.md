@@ -26,4 +26,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ==========================
 
 ## Task Lanjutan
-episode 8
+episode 10

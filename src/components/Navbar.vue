@@ -28,7 +28,9 @@
             <b-nav-item to="/cart">
               Keranjang
               <b-icon-bag class="mr-1"></b-icon-bag>
-              <b-badge variant="danger">{{ jumlah_pesanans.length }}</b-badge>
+              <b-badge variant="danger">{{
+                updateCart ? updateCart.length : jumlah_pesanans.length
+              }}</b-badge>
             </b-nav-item>
           </b-navbar-nav>
         </b-navbar-nav>
@@ -42,6 +44,7 @@ import axios from "axios";
 export default {
   name: "Navbar",
   components: {},
+  props: ["updateCart"],
   data() {
     return {
       jumlah_pesanans: [],
