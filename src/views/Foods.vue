@@ -60,14 +60,14 @@ export default {
     },
     searchFood() {
       axios
-        .get("http://localhost:3000/products?q=" + this.search)
+        .get("http://localhost:3030/products?q=" + this.search)
         .then((response) => this.setProducts(response.data))
         .catch((error) => console.log("Gagal Coy : ", error));
     },
   },
   mounted() {
     axios
-      .get("http://localhost:3000/products")
+      .get("http://localhost:3030/products")
       .then((response) => this.setProducts(response.data))
       .catch((error) => console.log("Gagal Coy : ", error));
   },

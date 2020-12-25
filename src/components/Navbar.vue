@@ -57,7 +57,7 @@ export default {
   },
   mounted() {
     axios
-      .get("http://localhost:3000/keranjangs")
+      .get("http://localhost:3030/keranjangs")
       .then((response) => this.setJumlah(response.data))
       .catch((error) => console.log("Gagal Coy : ", error));
   },

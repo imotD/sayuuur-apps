@@ -59,6 +59,38 @@
           </tbody>
         </table>
       </b-row>
+      <!-- fromcheckout -->
+      <b-row class="justify-content-end">
+        <b-col cols="4">
+          <b-form @submit.prevent>
+            <b-form-group label="Nama">
+              <b-form-input
+                v-model="pesan.name"
+                type="text"
+                placeholder="Masukan Nama"
+                required
+              ></b-form-input>
+            </b-form-group>
+            <b-form-group label="No Meja">
+              <b-form-input
+                v-model="pesan.nomeja"
+                type="number"
+                placeholder="Masukan Nomor Meja"
+                required
+              ></b-form-input>
+            </b-form-group>
+
+            <b-button
+              type="submit"
+              class="btn btn-success float-right"
+              @click="checkout"
+            >
+              <b-icon-cart4></b-icon-cart4>
+              Pesan
+            </b-button>
+          </b-form>
+        </b-col>
+      </b-row>
     </b-container>
   </div>
 </template>
@@ -89,15 +121,48 @@ export default {
         },
       ],
       keranjangs: [],
+      pesan: {},
     };
   },
   methods: {
+    checkout() {
+      if (this.pesan.name && this.pesan.nomeja) {
+        this.pesan.keranjangs = this.keranjangs;
+        axios
+          .post("http://localhost:3030/pesanans", this.pesan)
+          .then(() => {
+            // hapus item
+            this.keranjangs.map((item) => {
+              return axios
+                .delete("http://localhost:3030/keranjangs/" + item.id)
+                .catch((error) => console.log("Gagal Coy : ", error));
+            });
+            this.$router.push({ path: "/pesanan-sukses" });
+            this.$toast.success("Sukses Terpesan.", {
+              type: "success",
+              position: "top-right",
+              duration: 3000,
+              dismissible: "true",
+            });
+            this.pesan.jumlah_pemesanan = "";
+            this.pesan.keterangan = "";
+          })
+          .catch((error) => console.log("Gagal Coy : ", error));
+      } else {
+        this.$toast.error("Nama dan Nomor Meja harus diisi", {
+          type: "error",
+          position: "top-right",
+          duration: 3000,
+          dismissible: "true",
+        });
+      }
+    },
     setKeranjangs(params) {
       this.keranjangs = params;
     },
     hapusKeranjang(id) {
       axios
-        .delete("http://localhost:3000/keranjangs/" + id)
+        .delete("http://localhost:3030/keranjangs/" + id)
         .then(() => {
           this.$toast.info("Sukses telah terhapus", {
             type: "info",
@@ -107,7 +172,7 @@ export default {
           });
           // update
           axios
-            .get("http://localhost:3000/keranjangs")
+            .get("http://localhost:3030/keranjangs")
             .then((response) => this.setKeranjangs(response.data))
             .catch((error) => console.log("Gagal Coy : ", error));
         })
@@ -116,7 +181,7 @@ export default {
   },
   mounted() {
     axios
-      .get("http://localhost:3000/keranjangs")
+      .get("http://localhost:3030/keranjangs")
       .then((response) => this.setKeranjangs(response.data))
       .catch((error) => console.log("Gagal Coy : ", error));
   },
