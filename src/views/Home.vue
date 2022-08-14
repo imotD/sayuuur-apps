@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <Navbar />
     <b-container>
       <Hero />
       <b-row class="align-items-center">
@@ -29,7 +28,6 @@
 </template>
 
 <script>
-import Navbar from "@/components/Navbar.vue";
 import Hero from "@/components/Hero.vue";
 import CardProduct from "@/components/CardProduct.vue";
 import Service from "@/services/service.js";
@@ -37,7 +35,6 @@ import Service from "@/services/service.js";
 export default {
   name: "Home",
   components: {
-    Navbar,
     Hero,
     CardProduct,
   },

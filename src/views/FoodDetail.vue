@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Navbar />
     <b-breadcrumb :items="items"></b-breadcrumb>
     <b-container>
       <b-row>
@@ -48,14 +47,11 @@
 </template>
 
 <script>
-import Navbar from "@/components/Navbar.vue";
 import Service from "@/services/service.js";
 
 export default {
   name: "FoodDetail",
-  components: {
-    Navbar,
-  },
+  components: {},
   props: ["id"],
   data() {
     return {

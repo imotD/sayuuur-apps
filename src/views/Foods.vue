@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Navbar />
     <b-container>
       <b-row class="mt-4">
         <b-col>
@@ -38,14 +37,12 @@
 </template>
 
 <script>
-import Navbar from "@/components/Navbar.vue";
 import CardProduct from "@/components/CardProduct.vue";
 import Service from "@/services/service.js";
 
 export default {
   name: "Foods",
   components: {
-    Navbar,
     CardProduct,
   },
   data() {

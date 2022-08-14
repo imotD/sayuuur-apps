@@ -29,10 +29,11 @@
               Keranjang
               <b-icon-bag class="mr-1"></b-icon-bag>
               <b-badge variant="danger">{{
-                updateCart ? updateCart.length : jumlah_pesanans.length
+                updateCart ? updateCart.length : cartLength
               }}</b-badge>
             </b-nav-item>
           </b-navbar-nav>
+          <b-nav-item to="/create-food">Add Makanan</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
@@ -40,25 +41,20 @@
 </template>
 
 <script>
-import Service from "@/services/service.js";
 export default {
   name: "Navbar",
   components: {},
   props: ["updateCart"],
   data() {
-    return {
-      jumlah_pesanans: [],
-    };
-  },
-  methods: {
-    setJumlah(data) {
-      this.jumlah_pesanans = data;
-    },
+    return {};
   },
   mounted() {
-    Service.getCart()
-      .then((response) => this.setJumlah(response.data))
-      .catch((error) => console.log("Gagal Coy : ", error));
+    this.$store.dispatch("getCart");
+  },
+  computed: {
+    cartLength() {
+      return this.$store.getters.cartLength;
+    },
   },
 };
 </script>
