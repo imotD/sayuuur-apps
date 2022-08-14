@@ -6,7 +6,7 @@
       <b-row>
         <b-col cols="6">
           <b-img
-            :src="require(`@/assets/img/${product.gambar}`)"
+            :src="require('../assets/img/' + product.gambar)"
             fluid
             alt="image"
           ></b-img>
@@ -49,13 +49,14 @@
 
 <script>
 import Navbar from "@/components/Navbar.vue";
-import axios from "axios";
+import Service from "@/services/service.js";
 
 export default {
   name: "FoodDetail",
   components: {
     Navbar,
   },
+  props: ["id"],
   data() {
     return {
       pesan: {},
@@ -84,8 +85,7 @@ export default {
     pemesanan() {
       if (this.pesan.jumlah_pemesanan) {
         this.pesan.product = this.product;
-        axios
-          .post("http://localhost:3030/keranjangs", this.pesan)
+        Service.postCart(this.pesan)
           .then(() => {
             this.$router.push({ path: "/cart" });
             this.$toast.success("Berhasil masuk keranjang.", {
@@ -109,8 +109,7 @@ export default {
     },
   },
   mounted() {
-    axios
-      .get("http://localhost:3030/products/" + this.$route.params.id)
+    Service.getProductDetail(this.id)
       .then((response) => this.setProducts(response.data))
       .catch((error) => console.log("Gagal Coy : ", error));
   },

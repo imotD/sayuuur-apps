@@ -11,7 +11,11 @@
         >
       </b-col>
       <b-col>
-        <b-img src="" fluid alt="img"></b-img>
+        <b-img
+          :src="require('../assets/img/bakso.jpg')"
+          fluid
+          alt="img"
+        ></b-img>
       </b-col>
     </b-row>
   </div>

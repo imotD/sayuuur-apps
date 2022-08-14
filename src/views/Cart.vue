@@ -97,7 +97,7 @@
 
 <script>
 import Navbar from "@/components/Navbar.vue";
-import axios from "axios";
+import Service from "@/services/service.js";
 
 export default {
   name: "Cart",
@@ -128,14 +128,13 @@ export default {
     checkout() {
       if (this.pesan.name && this.pesan.nomeja) {
         this.pesan.keranjangs = this.keranjangs;
-        axios
-          .post("http://localhost:3030/pesanans", this.pesan)
+        Service.postDelivery(this.pesan)
           .then(() => {
             // hapus item
             this.keranjangs.map((item) => {
-              return axios
-                .delete("http://localhost:3030/keranjangs/" + item.id)
-                .catch((error) => console.log("Gagal Coy : ", error));
+              return Service.delCart(item.id).catch((error) =>
+                console.log("Gagal Coy : ", error)
+              );
             });
             this.$router.push({ path: "/pesanan-sukses" });
             this.$toast.success("Sukses Terpesan.", {
@@ -161,8 +160,7 @@ export default {
       this.keranjangs = params;
     },
     hapusKeranjang(id) {
-      axios
-        .delete("http://localhost:3030/keranjangs/" + id)
+      Service.delCart(id)
         .then(() => {
           this.$toast.info("Sukses telah terhapus", {
             type: "info",
@@ -171,8 +169,7 @@ export default {
             dismissible: "true",
           });
           // update
-          axios
-            .get("http://localhost:3030/keranjangs")
+          Service.getCart()
             .then((response) => this.setKeranjangs(response.data))
             .catch((error) => console.log("Gagal Coy : ", error));
         })
@@ -180,14 +177,13 @@ export default {
     },
   },
   mounted() {
-    axios
-      .get("http://localhost:3030/keranjangs")
+    Service.getCart()
       .then((response) => this.setKeranjangs(response.data))
       .catch((error) => console.log("Gagal Coy : ", error));
   },
   computed: {
     totalHarga() {
-      return this.keranjangs.reduce(function(item, data) {
+      return this.keranjangs.reduce(function (item, data) {
         return item + data.product.harga * data.jumlah_pemesanan;
       }, 0);
     },

@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import Service from "@/services/service.js";
 export default {
   name: "Navbar",
   components: {},
@@ -56,8 +56,7 @@ export default {
     },
   },
   mounted() {
-    axios
-      .get("http://localhost:3030/keranjangs")
+    Service.getCart()
       .then((response) => this.setJumlah(response.data))
       .catch((error) => console.log("Gagal Coy : ", error));
   },

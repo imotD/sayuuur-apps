@@ -21,7 +21,7 @@
           v-for="product in products"
           :key="product.id"
         >
-          <CardProduct :product="product" />
+          <CardProduct :product="product" :stock="product.stock" />
         </b-col>
       </b-row>
     </b-container>
@@ -32,7 +32,7 @@
 import Navbar from "@/components/Navbar.vue";
 import Hero from "@/components/Hero.vue";
 import CardProduct from "@/components/CardProduct.vue";
-import axios from "axios";
+import Service from "@/services/service.js";
 
 export default {
   name: "Home",
@@ -52,8 +52,7 @@ export default {
     },
   },
   mounted() {
-    axios
-      .get("http://localhost:3030/best-products")
+    Service.getProductBest()
       .then((response) => this.setProducts(response.data))
       .catch((error) => console.log("Gagal Coy : ", error));
   },

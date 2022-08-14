@@ -30,7 +30,7 @@
           v-for="product in products"
           :key="product.id"
         >
-          <CardProduct :product="product" />
+          <CardProduct :product="product" :stock="product.stock" />
         </b-col>
       </b-row>
     </b-container>
@@ -40,7 +40,7 @@
 <script>
 import Navbar from "@/components/Navbar.vue";
 import CardProduct from "@/components/CardProduct.vue";
-import axios from "axios";
+import Service from "@/services/service.js";
 
 export default {
   name: "Foods",
@@ -59,15 +59,13 @@ export default {
       this.products = data;
     },
     searchFood() {
-      axios
-        .get("http://localhost:3030/products?q=" + this.search)
+      Service.getProductSearch(this.search)
         .then((response) => this.setProducts(response.data))
         .catch((error) => console.log("Gagal Coy : ", error));
     },
   },
   mounted() {
-    axios
-      .get("http://localhost:3030/products")
+    Service.getProducts()
       .then((response) => this.setProducts(response.data))
       .catch((error) => console.log("Gagal Coy : ", error));
   },

@@ -16,12 +16,14 @@ const routes = [{
   },
   {
     path: '/foods',
+    alias: '/food',
     name: 'Foods',
     component: Foods
   },
   {
     path: '/foods/:id',
     name: 'FoodDetail',
+    props: true,
     component: FoodDetail
   },
   {
