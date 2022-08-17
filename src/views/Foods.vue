@@ -38,7 +38,6 @@
 
 <script>
 import CardProduct from "@/components/CardProduct.vue";
-import Service from "@/services/service.js";
 
 export default {
   name: "Foods",
@@ -47,24 +46,21 @@ export default {
   },
   data() {
     return {
-      products: [],
       search: "",
     };
   },
   methods: {
-    setProducts(data) {
-      this.products = data;
-    },
     searchFood() {
-      Service.getProductSearch(this.search)
-        .then((response) => this.setProducts(response.data))
-        .catch((error) => console.log("Gagal Coy : ", error));
+      this.$store.dispatch("getSearchProduct", this.search);
     },
   },
   mounted() {
-    Service.getProducts()
-      .then((response) => this.setProducts(response.data))
-      .catch((error) => console.log("Gagal Coy : ", error));
+    this.$store.dispatch("getProducts");
+  },
+  computed: {
+    products() {
+      return this.$store.state.products;
+    },
   },
 };
 </script>

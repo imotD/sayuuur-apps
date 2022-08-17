@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Navbar :updateCart="keranjangs" />
     <b-breadcrumb :items="items"></b-breadcrumb>
     <b-container>
       <b-row class="mt-4">
@@ -45,7 +44,10 @@
                 </strong>
               </td>
               <td>
-                <b-icon-trash @click="hapusKeranjang(cart.id)"></b-icon-trash>
+                <b-icon-trash
+                  style="cursor: pointer"
+                  @click="deleteCart(cart.id)"
+                ></b-icon-trash>
               </td>
             </tr>
             <tr>
@@ -96,14 +98,10 @@
 </template>
 
 <script>
-import Navbar from "@/components/Navbar.vue";
 import Service from "@/services/service.js";
 
 export default {
   name: "Cart",
-  components: {
-    Navbar,
-  },
   data() {
     return {
       items: [
@@ -120,11 +118,16 @@ export default {
           active: true,
         },
       ],
-      keranjangs: [],
-      pesan: {},
+      pesan: this.createFreshEventObject(),
     };
   },
   methods: {
+    createFreshEventObject() {
+      return {
+        jumlah_pemesanan: "",
+        keterangan: "",
+      };
+    },
     checkout() {
       if (this.pesan.name && this.pesan.nomeja) {
         this.pesan.keranjangs = this.keranjangs;
@@ -143,8 +146,8 @@ export default {
               duration: 3000,
               dismissible: "true",
             });
-            this.pesan.jumlah_pemesanan = "";
-            this.pesan.keterangan = "";
+            this.$store.dispatch("getCart");
+            this.createFreshEventObject();
           })
           .catch((error) => console.log("Gagal Coy : ", error));
       } else {
@@ -159,7 +162,7 @@ export default {
     setKeranjangs(params) {
       this.keranjangs = params;
     },
-    hapusKeranjang(id) {
+    deleteCart(id) {
       Service.delCart(id)
         .then(() => {
           this.$toast.info("Sukses telah terhapus", {
@@ -169,19 +172,18 @@ export default {
             dismissible: "true",
           });
           // update
-          Service.getCart()
-            .then((response) => this.setKeranjangs(response.data))
-            .catch((error) => console.log("Gagal Coy : ", error));
+          this.$store.dispatch("getCart");
         })
         .catch((error) => console.log("Gagal Coy : ", error));
     },
   },
   mounted() {
-    Service.getCart()
-      .then((response) => this.setKeranjangs(response.data))
-      .catch((error) => console.log("Gagal Coy : ", error));
+    this.$store.dispatch("getCart");
   },
   computed: {
+    keranjangs() {
+      return this.$store.state.cart;
+    },
     totalHarga() {
       return this.keranjangs.reduce(function (item, data) {
         return item + data.product.harga * data.jumlah_pemesanan;

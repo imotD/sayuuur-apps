@@ -30,7 +30,6 @@
 <script>
 import Hero from "@/components/Hero.vue";
 import CardProduct from "@/components/CardProduct.vue";
-import Service from "@/services/service.js";
 
 export default {
   name: "Home",
@@ -40,18 +39,16 @@ export default {
   },
   data() {
     return {
-      products: [],
+      // products: [],
     };
   },
-  methods: {
-    setProducts(data) {
-      this.products = data;
-    },
-  },
   mounted() {
-    Service.getProductBest()
-      .then((response) => this.setProducts(response.data))
-      .catch((error) => console.log("Gagal Coy : ", error));
+    this.$store.dispatch("getProductBest");
+  },
+  computed: {
+    products() {
+      return this.$store.state.bestProduct;
+    },
   },
 };
 </script>

@@ -47,16 +47,13 @@
 </template>
 
 <script>
-import Service from "@/services/service.js";
-
 export default {
   name: "FoodDetail",
   components: {},
   props: ["id"],
   data() {
     return {
-      pesan: {},
-      product: {},
+      pesan: this.createFreshEventObject(),
       items: [
         {
           text: "Home",
@@ -75,13 +72,17 @@ export default {
   },
 
   methods: {
-    setProducts(data) {
-      this.product = data;
+    createFreshEventObject() {
+      return {
+        jumlah_pemesanan: "",
+        keterangan: "",
+      };
     },
     pemesanan() {
       if (this.pesan.jumlah_pemesanan) {
         this.pesan.product = this.product;
-        Service.postCart(this.pesan)
+        this.$store
+          .dispatch("OrderFood", this.pesan)
           .then(() => {
             this.$router.push({ path: "/cart" });
             this.$toast.success("Berhasil masuk keranjang.", {
@@ -90,8 +91,7 @@ export default {
               duration: 3000,
               dismissible: "true",
             });
-            this.pesan.jumlah_pemesanan = "";
-            this.pesan.keterangan = "";
+            this.createFreshEventObject();
           })
           .catch((error) => console.log("Gagal Coy : ", error));
       } else {
@@ -105,9 +105,12 @@ export default {
     },
   },
   mounted() {
-    Service.getProductDetail(this.id)
-      .then((response) => this.setProducts(response.data))
-      .catch((error) => console.log("Gagal Coy : ", error));
+    this.$store.dispatch("getProductDetail", this.id);
+  },
+  computed: {
+    product() {
+      return this.$store.state.productDetail;
+    },
   },
 };
 </script>
