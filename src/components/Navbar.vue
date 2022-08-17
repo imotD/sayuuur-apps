@@ -49,7 +49,7 @@ export default {
     return {};
   },
   mounted() {
-    this.$store.dispatch("getCart");
+    this.$store.dispatch("cart/getCart");
   },
   computed: {
     cartLength() {

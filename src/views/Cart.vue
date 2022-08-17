@@ -146,7 +146,7 @@ export default {
               duration: 3000,
               dismissible: "true",
             });
-            this.$store.dispatch("getCart");
+            this.$store.dispatch("cart/getCart");
             this.createFreshEventObject();
           })
           .catch((error) => console.log("Gagal Coy : ", error));
@@ -172,17 +172,17 @@ export default {
             dismissible: "true",
           });
           // update
-          this.$store.dispatch("getCart");
+          this.$store.dispatch("cart/getCart");
         })
         .catch((error) => console.log("Gagal Coy : ", error));
     },
   },
   mounted() {
-    this.$store.dispatch("getCart");
+    this.$store.dispatch("cart/getCart");
   },
   computed: {
     keranjangs() {
-      return this.$store.state.cart;
+      return this.$store.state.cart.cart;
     },
     totalHarga() {
       return this.keranjangs.reduce(function (item, data) {

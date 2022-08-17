@@ -82,7 +82,7 @@ export default {
       if (this.pesan.jumlah_pemesanan) {
         this.pesan.product = this.product;
         this.$store
-          .dispatch("OrderFood", this.pesan)
+          .dispatch("cart/OrderFood", this.pesan)
           .then(() => {
             this.$router.push({ path: "/cart" });
             this.$toast.success("Berhasil masuk keranjang.", {
@@ -105,11 +105,11 @@ export default {
     },
   },
   mounted() {
-    this.$store.dispatch("getProductDetail", this.id);
+    this.$store.dispatch("product/getProductDetail", this.id);
   },
   computed: {
     product() {
-      return this.$store.state.productDetail;
+      return this.$store.state.product.productDetail;
     },
   },
 };

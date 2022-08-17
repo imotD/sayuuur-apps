@@ -51,15 +51,15 @@ export default {
   },
   methods: {
     searchFood() {
-      this.$store.dispatch("getSearchProduct", this.search);
+      this.$store.dispatch("product/getSearchProduct", this.search);
     },
   },
   mounted() {
-    this.$store.dispatch("getProducts");
+    this.$store.dispatch("product/getProducts");
   },
   computed: {
     products() {
-      return this.$store.state.products;
+      return this.$store.state.product.products;
     },
   },
 };

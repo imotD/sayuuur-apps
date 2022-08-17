@@ -43,11 +43,11 @@ export default {
     };
   },
   mounted() {
-    this.$store.dispatch("getProductBest");
+    this.$store.dispatch("product/getProductBest");
   },
   computed: {
     products() {
-      return this.$store.state.bestProduct;
+      return this.$store.state.product.bestProduct;
     },
   },
 };
