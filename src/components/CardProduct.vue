@@ -10,7 +10,7 @@
       class="mb-2"
     >
       <b-card-text> Harga : Rp. {{ product.harga }} </b-card-text>
-      <b-card-text> Stock : {{ product.stock }} </b-card-text>
+      <!-- <b-card-text> Stock : {{ product.stock }} </b-card-text> -->
       <b-button
         :to="'/foods/' + product.id"
         variant="success"

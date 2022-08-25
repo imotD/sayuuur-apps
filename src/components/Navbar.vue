@@ -33,7 +33,7 @@
               }}</b-badge>
             </b-nav-item>
           </b-navbar-nav>
-          <b-nav-item to="/create-food">Add Makanan</b-nav-item>
+          <!-- <b-nav-item to="/create-food">Add Makanan</b-nav-item> -->
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
@@ -53,7 +53,7 @@ export default {
   },
   computed: {
     cartLength() {
-      return this.$store.getters.cartLength;
+      return this.$store.getters["cart/cartLength"];
     },
   },
 };
