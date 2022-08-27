@@ -6,7 +6,7 @@
       img-alt="Image"
       img-top
       tag="article"
-      style="max-width: 20rem"
+      style="max-width: 20rem; min-height: 20rem"
       class="mb-2"
     >
       <b-card-text> Harga : Rp. {{ product.harga }} </b-card-text>

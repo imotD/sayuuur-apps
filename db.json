@@ -1,34 +1,61 @@
 {
   "best-products": [
     {
-      "id": 1,
-      "kode": "K-01",
-      "nama": "Sate Ayam",
+      "id": 22,
+      "kode": "K-22",
+      "nama": "Cabe Merah",
       "harga": 16000,
       "stock": 2,
       "is_ready": true,
-      "gambar": "sate-ayam.jpg"
+      "gambar": "chili.png"
     },
     {
-      "id": 2,
-      "kode": "K-02",
-      "nama": "Nasi Goreng Telur",
+      "id": 23,
+      "kode": "K-23",
+      "nama": "Telur",
       "harga": 14000,
       "stock": 2,
       "is_ready": true,
-      "gambar": "nasi-goreng-telor.jpg"
+      "gambar": "egg.png"
     },
     {
-      "id": 3,
-      "kode": "K-03",
-      "nama": "Nasi Rames",
+      "id": 24,
+      "kode": "K-23",
+      "nama": "Sayur Kol",
       "harga": 12000,
       "stock": 3,
       "is_ready": true,
-      "gambar": "nasi-rames.jpg"
+      "gambar": "cambage.png"
     }
   ],
   "products": [
+    {
+      "id": 22,
+      "kode": "K-22",
+      "nama": "Cabe Merah",
+      "harga": 16000,
+      "stock": 2,
+      "is_ready": true,
+      "gambar": "chili.png"
+    },
+    {
+      "id": 23,
+      "kode": "K-23",
+      "nama": "Telur",
+      "harga": 14000,
+      "stock": 2,
+      "is_ready": true,
+      "gambar": "egg.png"
+    },
+    {
+      "id": 24,
+      "kode": "K-23",
+      "nama": "Sayur Kol",
+      "harga": 12000,
+      "stock": 3,
+      "is_ready": true,
+      "gambar": "cambage.png"
+    },
     {
       "id": 1,
       "kode": "K-01",

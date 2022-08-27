@@ -1,8 +1,8 @@
 <template>
   <div class="home">
+    <Hero />
     <b-container>
-      <Hero />
-      <b-row class="align-items-center">
+      <b-row class="align-items-center my-3">
         <b-col
           ><h2>Best <strong>Foods</strong></h2>
         </b-col>
