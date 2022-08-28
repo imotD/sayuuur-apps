@@ -93,7 +93,7 @@ export default {
             });
             this.createFreshEventObject();
           })
-          .catch((error) => console.log("Gagal Coy : ", error));
+          .catch(() => {});
       } else {
         this.$toast.error("Jumlah Pesanan harus diiisi.", {
           type: "error",

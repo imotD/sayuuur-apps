@@ -17,7 +17,6 @@
         <b-col>
           <b-input-group class="mb-2">
             <b-form-input
-              v-model="search"
               class="py-2"
               placeholder="Cari makanan"
             ></b-form-input>

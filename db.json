@@ -138,7 +138,22 @@
       "gambar": "lontong-opor-ayam.jpg"
     }
   ],
-  "keranjangs": [],
+  "keranjangs": [
+    {
+      "jumlah_pemesanan": "1",
+      "keterangan": "1",
+      "product": {
+        "id": 22,
+        "kode": "K-22",
+        "nama": "Cabe Merah",
+        "harga": 16000,
+        "stock": 2,
+        "is_ready": true,
+        "gambar": "chili.png"
+      },
+      "id": 1
+    }
+  ],
   "pesanans": [
     {
       "jumlah_pemesanan": "",

@@ -23,24 +23,56 @@ export const mutations = {
 };
 
 export const actions = {
-  getProductBest({ commit }) {
-    return Service.getProductBest().then((res) => {
-      commit('SET_BEST', res.data);
-    });
+  getProductBest({ commit, dispatch }) {
+    return Service.getProductBest()
+      .then((res) => {
+        commit('SET_BEST', res.data);
+      })
+      .catch((error) => {
+        const notification = {
+          type: 'error',
+          message: 'Ada masalah: ' + error.message
+        };
+        dispatch('notification/add', notification, { root: true });
+      });
   },
-  getProducts({ commit }) {
-    return Service.getProducts().then((res) => {
-      commit('SET_PRODUCTS', res.data);
-    });
+  getProducts({ commit, dispatch }) {
+    return Service.getProducts()
+      .then((res) => {
+        commit('SET_PRODUCTS', res.data);
+      })
+      .catch((error) => {
+        const notification = {
+          type: 'error',
+          message: 'Ada masalah: ' + error.message
+        };
+        dispatch('notification/add', notification, { root: true });
+      });
   },
-  getProductDetail({ commit }, id) {
-    return Service.getProductDetail(id).then((res) => {
-      commit('SET_PRODUCT_DETAIL', res.data);
-    });
+  getProductDetail({ commit, dispatch }, id) {
+    return Service.getProductDetail(id)
+      .then((res) => {
+        commit('SET_PRODUCT_DETAIL', res.data);
+      })
+      .catch((error) => {
+        const notification = {
+          type: 'error',
+          message: 'Ada masalah: ' + error.message
+        };
+        dispatch('notification/add', notification, { root: true });
+      });
   },
-  getSearchProduct({ commit }, search) {
-    return Service.getProductSearch(search).then((res) => {
-      commit('SET_PRODUCTS', res.data);
-    });
+  getSearchProduct({ commit, dispatch }, search) {
+    return Service.getProductSearch(search)
+      .then((res) => {
+        commit('SET_PRODUCTS', res.data);
+      })
+      .catch((error) => {
+        const notification = {
+          type: 'error',
+          message: 'Ada masalah: ' + error.message
+        };
+        dispatch('notification/add', notification, { root: true });
+      });
   }
 };

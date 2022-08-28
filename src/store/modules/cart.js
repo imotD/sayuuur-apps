@@ -18,14 +18,36 @@ export const mutations = {
   }
 };
 export const actions = {
-  getCart({ commit }) {
-    return Service.getCart().then((res) => {
-      commit('SET_CART', res.data);
-    });
+  getCart({ commit, dispatch }) {
+    return Service.getCart()
+      .then((res) => {
+        commit('SET_CART', res.data);
+      })
+      .catch((error) => {
+        const notification = {
+          type: 'error',
+          message: 'Ada masalah: ' + error.message
+        };
+        dispatch('notification/add', notification, { root: true });
+      });
   },
-  OrderFood({ commit }, food) {
-    return Service.postCart(food).then((res) => {
-      commit('ADD_CART', res.data);
-    });
+  OrderFood({ commit, dispatch }, food) {
+    return Service.postCart(food)
+      .then((res) => {
+        commit('ADD_CART', res.data);
+        const notification = {
+          type: 'succes',
+          message: 'Berhasil menambahkan'
+        };
+        dispatch('notification/add', notification, { root: true });
+      })
+      .catch((error) => {
+        const notification = {
+          type: 'error',
+          message: 'Ada masalah: ' + error.message
+        };
+        dispatch('notification/add', notification, { root: true });
+        throw error;
+      });
   }
 };
